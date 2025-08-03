@@ -4,16 +4,27 @@ import pickle
 import numpy as np
 import streamlit as st
 
-model=load_model('model.keras')
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
-with open('gender_labelencoder.pkl','rb') as file:
-    gender_labelencoder=pickle.load(file)
+# Join the script directory with the filenames to create absolute paths
+model_path = os.path.join(script_dir, 'model.keras')
+gender_encoder_path = os.path.join(script_dir, 'gender_labelencoder.pkl')
+geo_encoder_path = os.path.join(script_dir, 'geo_onehotencoder.pkl')
+scaler_path = os.path.join(script_dir, 'standardscaler.pkl')
 
-with open('geo_onehotencoder.pkl','rb') as file:
-    geo_onehotencoder=pickle.load(file)
-
-with open('standardscaler.pkl','rb') as file:
-    standardscaler=pickle.load(file)
+# --- Load Models and Encoders ---
+# Load all your files using the correct paths
+try:
+    model = load_model(model_path)
+    with open(gender_encoder_path, 'rb') as file:
+        gender_labelencoder = pickle.load(file)
+    with open(geo_encoder_path, 'rb') as file:
+        geo_onehotencoder = pickle.load(file)
+    with open(scaler_path, 'rb') as file:
+        standardscaler = pickle.load(file)
+except Exception as e:
+    st.error(f"Error loading model or preprocessor files: {e}")
+    st.stop() # Stop the app if files can't be loaded
 
 ## streamlit app
 st.title('Customer Churn Prediction')
@@ -57,4 +68,5 @@ st.write(prob)
 if prob>0.5:
     st.write('Customer Likely to Churn')
 else:
+
     st.write('Customer not likely to churn')
