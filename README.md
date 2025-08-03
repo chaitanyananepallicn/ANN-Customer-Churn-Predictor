@@ -36,25 +36,5 @@ Web Application
 A user-friendly web application has been developed using Streamlit to interact with the trained model. Users can input customer details such as geography, gender, age, balance, credit score, and other relevant information through a simple UI. The application then processes this data, feeds it to the model, and displays the churn probability, indicating whether the customer is likely to churn.
 
 
-How to Run the Project
-Clone the repository:
 
-Bash
-
-git clone <your-repository-url>
-Navigate to the project directory:
-
-Bash
-
-cd <your-project-directory>
-Install the required dependencies:
-
-Bash
-
-pip install -r requirements.txt
-Run the Streamlit application:
-
-Bash
-
-streamlit run app.py
 
