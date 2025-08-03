@@ -3,6 +3,7 @@ from tensorflow.keras.models import load_model
 import pickle
 import numpy as np
 import streamlit as st
+import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -70,3 +71,4 @@ if prob>0.5:
 else:
 
     st.write('Customer not likely to churn')
+
